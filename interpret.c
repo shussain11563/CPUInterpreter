@@ -19,34 +19,16 @@ void ioInstructions(char* currLine, int* registers)
     char readRegister[4]; 
     sscanf(currLine, "%s %s", tempCommand, readRegister);
     int index = registerIndex(readRegister);
-
     if(strcmp("read", tempCommand)==0)
     {
         int readValue = 0;
-        scanf("%d\n", &readValue);
-        if(strcmp("ax", readRegister)==0)
-        {
-            registers[0] = readValue;
-        }
-        else if(strcmp("bx", readRegister)==0)
-        {
-            registers[1] = readValue;
-        }
-        else if(strcmp("cx", readRegister)==0)
-        {
-            registers[2] = readValue;
-        }
-        else if(strcmp("dx", readRegister)==0)
-        {
-            registers[3] = readValue;
-        }
+        scanf("%d", &readValue);
+        registers[index] = readValue;
     }
     else if(strcmp("print", tempCommand)==0)
     {
-        printf("H");
+        printf("%d\n", registers[index]);
     }
-
-    
 }
 
 ///remember -g flag in make
@@ -60,7 +42,8 @@ int main(int argc, char* argv[])
     //create instruction pointer for each line and store in array for jumps
     //REGISTERS
     char instructionPointer[100][50];
-    signed short int registers[4] = {0,0,0,0};
+    //signed short int registers[4] = {0,0,0,0};
+    int registers[4] = {0,0,0,0};
     //signed short int ax = 0;
     //signed short int bx = 0;
     //signed short int cx = 0;
@@ -83,16 +66,16 @@ int main(int argc, char* argv[])
         
         if(strcmp("read", currCommand))
         {
-            //read(currLine, )
+            ioInstructions(currLine, registers);
         }
         else if(strcmp("print", currCommand))
         {
-
+            ioInstructions(currLine, registers);
         }
-        else if(strcmp("read", currCommand))
-        {
+        //else if(strcmp("mult", currCommand))
+        //{
 
-        }
+        //}
         
 
         
