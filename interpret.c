@@ -64,11 +64,7 @@ int main(int argc, char* argv[])
         parseCommand(currLine, currCommand);
         
         
-        if(strcmp("read", currCommand))
-        {
-            ioInstructions(currLine, registers);
-        }
-        else if(strcmp("print", currCommand))
+        if(strcmp("read", currCommand)==0 || strcmp("print", currCommand)==0)
         {
             ioInstructions(currLine, registers);
         }
