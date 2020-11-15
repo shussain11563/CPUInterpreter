@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 //parse Command from string
 void parseCommand(char* currLine, char* currCommand)
@@ -10,6 +11,24 @@ void parseCommand(char* currLine, char* currCommand)
 int registerIndex(char* stringReg)
 {
    return stringReg[0] - 97;
+}
+
+//find command read register 
+int isNumber(char* stringReg)
+{
+    int condition = 1;
+    int i = 0;
+    while(!(stringReg[i]=='\0'))
+    {
+        printf("%c \n",stringReg[i]);
+        if(!(isdigit(stringReg[i])))
+        {
+            condition = 0;
+            return condition;
+        }
+        i++;
+    }
+    return condition;
 }
 
 //FILE IO
@@ -29,6 +48,50 @@ void ioInstructions(char* currLine, int* registers)
     {
         printf("%d\n", registers[index]);
     }
+}
+
+//arithmetic only supports multiply
+void arithmetic(char* currLine, int* registers)
+{
+    //arithmetic only supports multiply
+    char tempCommand[10]; 
+    char readFirst[10]; 
+    char readSecond[10];
+    int valueOfFirst;
+    int valueOfSec;
+    sscanf(currLine, "%s %s %s", tempCommand, readFirst, readSec);
+
+    //grab first register value
+    if(isNumber(readFirst)==1)
+    {
+        valueOfFirst = atoi(readFirst);
+    }
+    else
+    {
+        int index = registerIndex(readFirst);
+        valueOfFirst = registers[index];
+    }
+
+    //grab second register
+    valueOfSec = registers[registerIndex(readSec)];
+
+    if(strcmp("add", tempCommand)==0)
+    {
+        
+    }
+    else if(strcmp("sub", tempCommand)==0)
+    {
+
+    }
+    else if(strcmp("mul", tempCommand)==0)
+    {
+
+    }
+    else if(strcmp("div", tempCommand)==0)
+    {
+
+    }
+
 }
 
 ///remember -g flag in make
@@ -68,7 +131,10 @@ int main(int argc, char* argv[])
         {
             ioInstructions(currLine, registers);
         }
-        //else if(strcmp("mult", currCommand))
+        else if(strcmp("mult", currCommand))
+        {
+
+        }
         //{
 
         //}
