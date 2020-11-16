@@ -149,7 +149,9 @@ void ioInstructions(char* currLine, int* registers)
     }
     else if(strcmp("print", tempCommand)==0)
     {
-        printf("%d\n", registers[index]);
+        //add new line
+        //TESTING
+        printf("%d", registers[index]);
     }
 }
 
@@ -225,20 +227,6 @@ int main(int argc, char* argv[])
         fgets(instructionPointer[i], 50, fp);
     }
 
-
-//END OF EXPERIEMENT CODE
-    //signed short int registers[4];
-    //create instruction pointer for each line and store in array for jumps
-    //REGISTERS
-    //signed short int registers[4] = {0,0,0,0};
-
-
-    //n-1
-
-//deal with spaces
-
-    //while(fgets(currLine, 50, fp)!=NULL)
-    //for(int instructLinePtr = 0; instructLinePtr < 100; instructLinePtr++)
     int instructLinePtr = 0;
 
     while(instructLinePtr!=100)
@@ -246,25 +234,27 @@ int main(int argc, char* argv[])
         strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
         
-        
         if(strcmp("read", currCommand)==0 || strcmp("print", currCommand)==0)
         {
             ioInstructions(currLine, registers);
+            instructLinePtr++;
         }
         else if(strcmp("add", currCommand)==0 || strcmp("sub", currCommand)==0 || strcmp("mul", currCommand)==0 || strcmp("div", currCommand)==0 )
         {
             arithmeticInstructions(currLine, registers);
+            instructLinePtr++;
         }
         else if(strcmp("mov", currCommand)==0)
         {
             arithmeticInstructions(currLine, registers);
+            instructLinePtr++;
         }
         else if(strcmp("jmp", currCommand)==0)
         {
             instructLinePtr = jumpAt(currLine);
             continue;
         }
-        else if(strcmp("je", currCommand)==0 || strcmp("jne", currCommand)==0 || strcmp("jg", currCommand)==0) || strcmp("jge", currCommand)==0 || strcmp("jl", currCommand)==0 || strcmp("jle", currCommand)==0)
+        else if(strcmp("je", currCommand)==0 || strcmp("jne", currCommand)==0 || strcmp("jg", currCommand)==0 || strcmp("jge", currCommand)==0 || strcmp("jl", currCommand)==0 || strcmp("jle", currCommand)==0)
         {
             int temp = instructLinePtr;
             int isSuccess = 0;
@@ -275,9 +265,14 @@ int main(int argc, char* argv[])
             {
                 continue;
             }
+            else
+            {
+                instructLinePtr++;
+            }
+            
         }
-        
-        instructLinePtr++;
+
+        //instructLinePtr++;
 
     }
 
