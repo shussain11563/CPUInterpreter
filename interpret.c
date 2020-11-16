@@ -150,11 +150,11 @@ void ioInstructions(char* currLine, int* registers)
     {
         if(isNumber(readRegister)==1)
         {
-            printf("%d\n", atoi(readRegister));
+            printf("%d", atoi(readRegister));
         }
         else
         {
-            printf("TESTING %d", registers[registerIndex(readRegister)]);
+            printf("%d", registers[registerIndex(readRegister)]);
         }
         
     }
@@ -278,6 +278,6 @@ int main(int argc, char* argv[])
         instructLinePtr++;
 
     }
-
+    printf("\n");
     
 }
