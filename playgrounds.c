@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <string.h>
 
 //parse Command from string
 void parseCommand(char* currLine, char* currCommand)
@@ -237,12 +236,11 @@ int main(int argc, char* argv[])
 
     while(instructLinePtr!=100)
     {
-
         if(instructLinePtr>=100)
         {
             break;
         }
-        
+
         strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
         
@@ -266,7 +264,7 @@ int main(int argc, char* argv[])
         }
         else if(strcmp("je", currCommand)==0 || strcmp("jne", currCommand)==0 || strcmp("jg", currCommand)==0 || strcmp("jge", currCommand)==0 || strcmp("jl", currCommand)==0 || strcmp("jle", currCommand)==0)
         {
-            //int temp = instructLinePtr;
+            int temp = instructLinePtr;
             int isSuccess = 0;
             instructLinePtr = jumpCondition(currLine, registers, instructLinePtr, &isSuccess);
 
@@ -278,13 +276,12 @@ int main(int argc, char* argv[])
         }
         else if(strlen(currLine)==0)
         {
-            printf("Line %d\n", instructLinePtr);
+            printf("Line %d", instructLinePtr);
             instructLinePtr++;
             continue;
         }
         
         instructLinePtr++;
-
     }
     printf("\n");
     
