@@ -57,40 +57,45 @@ void arithmetic(char* currLine, int* registers)
     char tempCommand[10]; 
     char readFirst[10]; 
     char readSecond[10];
-    int valueOfFirst;
+    int x;
     int valueOfSec;
     sscanf(currLine, "%s %s %s", tempCommand, readFirst, readSec);
 
     //grab first register value
     if(isNumber(readFirst)==1)
     {
-        valueOfFirst = atoi(readFirst);
+        x = atoi(readFirst);
     }
     else
     {
         int index = registerIndex(readFirst);
-        valueOfFirst = registers[index];
+        x = registers[index];
     }
 
     //grab second register
-    valueOfSec = registers[registerIndex(readSec)];
+    y = registers[registerIndex(readSec)];
 
     if(strcmp("add", tempCommand)==0)
     {
-        
+        y = y + x;
     }
     else if(strcmp("sub", tempCommand)==0)
     {
-
+        y = y - x;
     }
     else if(strcmp("mul", tempCommand)==0)
     {
-
+        y = y * x;
     }
     else if(strcmp("div", tempCommand)==0)
     {
-
+        y = x/y;
     }
+
+    //copy and paste this into if statements above instead
+    registers[registerIndex(readSec)] = y;
+
+   // CHECK DIVIDE ALGO
 
 }
 

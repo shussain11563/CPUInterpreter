@@ -6,8 +6,9 @@ int main(int argc, char* argv[])
 {
     short cont = 0;
     char string[10] = "23234d";
-    int contr = isNumber(string);
-    printf("Condition %d \n", contr);
+    //int contr = isNumber(string);
+    int test = 10/4;
+    printf("Condition %d \n", test);
 }
 
 int isNumber(char* stringReg)
