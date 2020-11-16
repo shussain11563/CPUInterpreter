@@ -20,7 +20,6 @@ int isNumber(char* stringReg)
     int i = 0;
     while(!(stringReg[i]=='\0'))
     {
-        printf("%c \n",stringReg[i]);
         if(!(isdigit(stringReg[i])))
         {
             condition = 0;
@@ -51,14 +50,14 @@ void ioInstructions(char* currLine, int* registers)
 }
 
 //arithmetic only supports multiply
-void arithmetic(char* currLine, int* registers)
+void arithmeticInstructions(char* currLine, int* registers)
 {
     //arithmetic only supports multiply
     char tempCommand[10]; 
     char readFirst[10]; 
-    char readSecond[10];
+    char readSec[10];
     int x;
-    int valueOfSec;
+    int y;
     sscanf(currLine, "%s %s %s", tempCommand, readFirst, readSec);
 
     //grab first register value
@@ -136,9 +135,9 @@ int main(int argc, char* argv[])
         {
             ioInstructions(currLine, registers);
         }
-        else if(strcmp("mult", currCommand))
+        else if(strcmp("add", currCommand)==0 || strcmp("sub", currCommand)==0 || strcmp("mul", currCommand)==0 || strcmp("div", currCommand)==0 )
         {
-
+            arithmeticInstructions(currLine, registers);
         }
         //{
 
