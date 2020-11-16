@@ -5,12 +5,10 @@
 int main(int argc, char* argv[])
 {
     short cont = 0;
-    char string[10] = "23234d";
-    //int contr = isNumber(string);
-    int test = 10/4;
-    printf("Condition %d \n", test);
+    char string[10] = "-23234";
+    int contr = isNumber(string);
+    printf("Condition %d \n", contr);
 }
-
 int isNumber(char* stringReg)
 {
     int condition = 1;

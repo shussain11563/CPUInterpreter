@@ -14,12 +14,17 @@ int registerIndex(char* stringReg)
 }
 
 //find command read register 
+//may not work with negative numbers
 int isNumber(char* stringReg)
 {
     int condition = 1;
     int i = 0;
     while(!(stringReg[i]=='\0'))
     {
+        if(stringReg[i]=='-' || stringReg[i]=='+')
+        {
+            continue;
+        }
         if(!(isdigit(stringReg[i])))
         {
             condition = 0;
@@ -90,6 +95,10 @@ void arithmeticInstructions(char* currLine, int* registers)
     {
         y = x/y;
     }
+    else if(strcmp("mov", tempCommand)==0)
+    {
+        y = x;
+    }
 
     //copy and paste this into if statements above instead
     registers[registerIndex(readSec)] = y;
@@ -138,6 +147,14 @@ int main(int argc, char* argv[])
         else if(strcmp("add", currCommand)==0 || strcmp("sub", currCommand)==0 || strcmp("mul", currCommand)==0 || strcmp("div", currCommand)==0 )
         {
             arithmeticInstructions(currLine, registers);
+        }
+        else if(strcmp("mov", currCommand)==0)
+        {
+            arithmeticInstructions(currLine, registers);
+        }
+        else if(strcmp("jmp", currCommand)==0)
+        {
+            
         }
         //{
 
