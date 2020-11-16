@@ -5,9 +5,32 @@
 int main(int argc, char* argv[])
 {
     short cont = 0;
-    char string[10] = "-23234";
-    int contr = isNumber(string);
-    printf("Condition %d \n", contr);
+    //char string[10] = "-23234";
+    //int contr = isNumber(string);
+    //printf("Condition %d \n", contr);
+
+    int r =0;
+
+    int i = 0;
+    while(i!=10)
+    {
+        r++;
+        if(r==20)
+        {
+            break;
+        }
+
+        printf("%d \n", i);
+        if(i==7)
+        {
+            i = 4;
+            continue;
+        }
+        
+
+        i++;
+    }
+
 }
 int isNumber(char* stringReg)
 {

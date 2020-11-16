@@ -8,11 +8,21 @@ void parseCommand(char* currLine, char* currCommand)
     sscanf(currLine, "%s", currCommand);
 }
 
+
 int registerIndex(char* stringReg)
 {
    return stringReg[0] - 97;
 }
 
+int jumpAt(char* currLine)
+{
+    char tempCommand[10]; 
+    char linePointer[5]; 
+    sscanf(currLine, "%s %s", tempCommand, linePointer);
+    int lineJump = atoi(linePointer);
+    return lineJump;
+
+}
 //find command read register 
 //may not work with negative numbers
 int isNumber(char* stringReg)
@@ -107,6 +117,8 @@ void arithmeticInstructions(char* currLine, int* registers)
 
 }
 
+
+
 ///remember -g flag in make
 int main(int argc, char* argv[])
 {
@@ -137,7 +149,10 @@ int main(int argc, char* argv[])
 //deal with spaces
 
     //while(fgets(currLine, 50, fp)!=NULL)
-    for(int instructLinePtr = 0; instructLinePtr < 100; instructLinePtr++)
+    //for(int instructLinePtr = 0; instructLinePtr < 100; instructLinePtr++)
+    int instructLinePtr = 0;
+
+    while(instructLinePtr!=100)
     {
         strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
@@ -157,15 +172,22 @@ int main(int argc, char* argv[])
         }
         else if(strcmp("jmp", currCommand)==0)
         {
+            instructLinePtr = jumpAt(currLine);
+            continue;
+        }
+        else if(strcmp("je", currCommand)==0)
+        {
             
         }
+
+
         //{
 
         //}
         
 
         
-
+        instructLinePtr++;
 
     }
 
