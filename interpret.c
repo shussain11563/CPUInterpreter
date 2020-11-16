@@ -54,8 +54,8 @@ int jumpCondition(char* currLine, int* registers, int currentLineInstruction, in
     char linePointer[5];
     char readFirst[10]; 
     char readSec[10];
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
     sscanf(currLine, "%s %s %s %s", tempCommand, linePointer, readFirst, readSec);  
 
     int jumpAt = atoi(linePointer);
@@ -223,13 +223,17 @@ int main(int argc, char* argv[])
     int registers[4] = {0,0,0,0};
 
     //char instructionC[6]; 
-    char currLine[50]; 
-    char currCommand[10]; 
+
 //EXPERIMENT CODE
     char instructionPointer[100][50];
+    for(int i = 0; i < 100; i++)
+    {
+        strcpy(instructionPointer[i], "");
+    }
 
     for(int i = 0; i < 100; i++)
     {
+        strcpy(instructionPointer[i], "");
         fgets(instructionPointer[i], 50, fp);
     }
     fclose(fp);
@@ -238,9 +242,17 @@ int main(int argc, char* argv[])
     while(instructLinePtr!=100)
     {
 
+        char currLine[50]; 
+        char currCommand[10]; 
         if(instructLinePtr>=100)
         {
             break;
+        }
+        
+        if(strlen(instructionPointer[instructLinePtr])==0)
+        {
+            instructLinePtr++;
+            continue;
         }
         
         strcpy(currLine ,instructionPointer[instructLinePtr]);
