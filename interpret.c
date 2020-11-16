@@ -111,32 +111,35 @@ void arithmeticInstructions(char* currLine, int* registers)
 int main(int argc, char* argv[])
 {
     FILE* fp = fopen(argv[1], "r");
-
-    //signed short int registers[4];
-    //fscanf
-    //change to ints
-    //create instruction pointer for each line and store in array for jumps
-    //REGISTERS
-    char instructionPointer[100][50];
-    //signed short int registers[4] = {0,0,0,0};
     int registers[4] = {0,0,0,0};
-    //signed short int ax = 0;
-    //signed short int bx = 0;
-    //signed short int cx = 0;
-    //signed short int dx = 0;
 
     //char instructionC[6]; 
     char currLine[50]; 
     char currCommand[10]; 
-    int instructLinePtr = -1;
+//EXPERIMENT CODE
+    char instructionPointer[100][50];
+
+    for(int i = 0; i < 100; i++)
+    {
+        fgets(instructionPointer[i], 50, fp);
+    }
+
+
+//END OF EXPERIEMENT CODE
+    //signed short int registers[4];
+    //create instruction pointer for each line and store in array for jumps
+    //REGISTERS
+    //signed short int registers[4] = {0,0,0,0};
+
+
     //n-1
 
 //deal with spaces
 
-    while(fgets(currLine, 50, fp)!=NULL)
+    //while(fgets(currLine, 50, fp)!=NULL)
+    for(int instructLinePtr = 0; instructLinePtr < 100; instructLinePtr++)
     {
-        instructLinePtr++;
-        
+        strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
         
         
@@ -174,11 +177,5 @@ int main(int argc, char* argv[])
     //fscanf(fp,"%s", instructionC);
     //change size
     //sscanf("")
-
-
-    //printf("%s \n" , instructionC);
-    
-
-
     fclose(fp);
 }
