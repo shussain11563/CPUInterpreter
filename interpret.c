@@ -154,7 +154,7 @@ void ioInstructions(char* currLine, int* registers)
         }
         else
         {
-            printf("%d\n", registers[registerIndex(readRegister)]);
+            printf("TESTING %d", registers[registerIndex(readRegister)]);
         }
         
     }
@@ -231,7 +231,7 @@ int main(int argc, char* argv[])
     {
         fgets(instructionPointer[i], 50, fp);
     }
-
+    fclose(fp);
     int instructLinePtr = 0;
 
     while(instructLinePtr!=100)
@@ -269,28 +269,15 @@ int main(int argc, char* argv[])
                 continue;
             }
         }
-        //else if(strlen(currLine)==0)
-        //{
-            //instructLinePtr++;
-            //continue;
-        //}
-        
-
-            //printf("Current line is")
-        
-        
+        else if(strlen(currLine)==0)
+        {
+            instructLinePtr++;
+            continue;
+        }
         
         instructLinePtr++;
 
     }
 
     
-
-    //g
-    //call an array (hashcode similar)
-
-    //fscanf(fp,"%s", instructionC);
-    //change size
-    //sscanf("")
-    fclose(fp);
 }
