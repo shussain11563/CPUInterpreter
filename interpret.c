@@ -149,9 +149,7 @@ void ioInstructions(char* currLine, int* registers)
     }
     else if(strcmp("print", tempCommand)==0)
     {
-        //add new line
-        //TESTING
-        printf("%d", registers[index]);
+        printf("%d\n", registers[index]);
     }
 }
 
@@ -234,20 +232,18 @@ int main(int argc, char* argv[])
         strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
         
+        
         if(strcmp("read", currCommand)==0 || strcmp("print", currCommand)==0)
         {
             ioInstructions(currLine, registers);
-            instructLinePtr++;
         }
         else if(strcmp("add", currCommand)==0 || strcmp("sub", currCommand)==0 || strcmp("mul", currCommand)==0 || strcmp("div", currCommand)==0 )
         {
             arithmeticInstructions(currLine, registers);
-            instructLinePtr++;
         }
         else if(strcmp("mov", currCommand)==0)
         {
             arithmeticInstructions(currLine, registers);
-            instructLinePtr++;
         }
         else if(strcmp("jmp", currCommand)==0)
         {
@@ -265,14 +261,13 @@ int main(int argc, char* argv[])
             {
                 continue;
             }
-            else
-            {
-                instructLinePtr++;
-            }
-            
         }
 
-        //instructLinePtr++;
+            //printf("Current line is")
+        
+        
+        
+        instructLinePtr++;
 
     }
 
