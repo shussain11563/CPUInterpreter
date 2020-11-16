@@ -23,6 +23,8 @@ int jumpAt(char* currLine)
     return lineJump;
 
 }
+
+
 //find command read register 
 //may not work with negative numbers
 int isNumber(char* stringReg)
@@ -43,6 +45,93 @@ int isNumber(char* stringReg)
         i++;
     }
     return condition;
+}
+
+int jumpCondition(char* currLine, int* registers, int currentLineInstruction, int* success)
+{
+    char tempCommand[10]; 
+    char linePointer[5];
+    char readFirst[10]; 
+    char readSec[10];
+    int x;
+    int y;
+    sscanf(currLine, "%s %s %s %s", tempCommand, linePointer, readFirst, readSec);  
+
+    int jumpAt = atoi(linePointer);
+
+    //grab first register value
+    if(isNumber(readFirst)==1)
+    {
+        x = atoi(readFirst);
+    }
+    else
+    {
+        int index = registerIndex(readFirst);
+        x = registers[index];
+    }
+
+    //grab second register
+    if(isNumber(readSec)==1)
+    {
+        y = atoi(readSec);
+    }
+    else
+    {
+        y = registers[registerIndex(readSec)];
+    }
+
+  
+    if(strcmp("je", tempCommand)==0)
+    {
+        if(x==y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    else if(strcmp("jne", tempCommand)==0)
+    {
+        if(x!=y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    else if(strcmp("jg", tempCommand)==0)
+    {
+        if(x>y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    else if(strcmp("jge", tempCommand)==0)
+    {
+        if(x>=y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    else if(strcmp("jl", tempCommand)==0)
+    {
+        if(x<y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    else if(strcmp("jle", tempCommand)==0)
+    {
+        if(x<=y)
+        {
+            *success = 1;
+            return jumpAt;
+        }
+    }
+    
+    return currentLineInstruction;
+      
 }
 
 //FILE IO
@@ -175,17 +264,18 @@ int main(int argc, char* argv[])
             instructLinePtr = jumpAt(currLine);
             continue;
         }
-        else if(strcmp("je", currCommand)==0)
+        else if(strcmp("je", currCommand)==0 || strcmp("jne", currCommand)==0 || strcmp("jg", currCommand)==0) || strcmp("jge", currCommand)==0 || strcmp("jl", currCommand)==0 || strcmp("jle", currCommand)==0)
         {
-            
+            int temp = instructLinePtr;
+            int isSuccess = 0;
+            instructLinePtr = jumpCondition(currLine, registers, instructLinePtr, &isSuccess);
+
+            //NOT SURE ABOUT POINTER PASS BY REFERENCE FOR ISSUCCESS
+            if(isSuccess==1)
+            {
+                continue;
+            }
         }
-
-
-        //{
-
-        //}
-        
-
         
         instructLinePtr++;
 
