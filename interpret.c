@@ -140,16 +140,23 @@ void ioInstructions(char* currLine, int* registers)
     char tempCommand[10]; 
     char readRegister[4]; 
     sscanf(currLine, "%s %s", tempCommand, readRegister);
-    int index = registerIndex(readRegister);
     if(strcmp("read", tempCommand)==0)
     {
         int readValue = 0;
         scanf("%d", &readValue);
-        registers[index] = readValue;
+        registers[registerIndex(readRegister)] = readValue;
     }
     else if(strcmp("print", tempCommand)==0)
     {
-        printf("%d\n", registers[index]);
+        if(isNumber(readRegister)==1)
+        {
+            printf("%d\n", atoi(readRegister));
+        }
+        else
+        {
+            printf("%d\n", registers[registerIndex(readRegister)]);
+        }
+        
     }
 }
 
@@ -262,6 +269,12 @@ int main(int argc, char* argv[])
                 continue;
             }
         }
+        //else if(strlen(currLine)==0)
+        //{
+            //instructLinePtr++;
+            //continue;
+        //}
+        
 
             //printf("Current line is")
         
