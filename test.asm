@@ -1,6 +1,19 @@
 read ax
+
+read bx
+
+mov ax bx
+
+mov 42 cx
+
+add 1 ax 
+
+sub cx bx
+
+mul -1 cx 
+
 print ax
-div 2 ax
-print ax
-jle 6 ax 0
-jmp 2
+
+print bx
+
+print cx

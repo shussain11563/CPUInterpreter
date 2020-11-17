@@ -9,7 +9,6 @@ void parseCommand(char* currLine, char* currCommand)
     sscanf(currLine, "%s", currCommand);
 }
 
-
 int registerIndex(char* stringReg)
 {
    return stringReg[0] - 97;
@@ -22,9 +21,7 @@ int jumpAt(char* currLine)
     sscanf(currLine, "%s %s", tempCommand, linePointer);
     int lineJump = atoi(linePointer);
     return lineJump;
-
 }
-
 
 //find command read register 
 //may not work with negative numbers
@@ -36,6 +33,7 @@ int isNumber(char* stringReg)
     {
         if(stringReg[i]=='-' || stringReg[i]=='+')
         {
+            i++;
             continue;
         }
         if(!(isdigit(stringReg[i])))
@@ -81,7 +79,6 @@ int jumpCondition(char* currLine, int* registers, int currentLineInstruction, in
         y = registers[registerIndex(readSec)];
     }
 
-  
     if(strcmp("je", tempCommand)==0)
     {
         if(x==y)
@@ -131,8 +128,7 @@ int jumpCondition(char* currLine, int* registers, int currentLineInstruction, in
         }
     }
     
-    return currentLineInstruction;
-      
+    return currentLineInstruction;    
 }
 
 //FILE IO
@@ -160,7 +156,6 @@ void ioInstructions(char* currLine, int* registers)
         
     }
 }
-
 //arithmetic only supports multiply
 void arithmeticInstructions(char* currLine, int* registers)
 {
@@ -209,41 +204,27 @@ void arithmeticInstructions(char* currLine, int* registers)
 
     //copy and paste this into if statements above instead
     registers[registerIndex(readSec)] = y;
-
    // CHECK DIVIDE ALGO
 
 }
-
-
-
-///remember -g flag in make
 int main(int argc, char* argv[])
 {
     FILE* fp = fopen(argv[1], "r");
-    int registers[4] = {0,0,0,0};
-
-    //char instructionC[6]; 
-
-//EXPERIMENT CODE
+    int registers[4] = {0,0,0,0}; 
     char instructionPointer[100][50];
-    for(int i = 0; i < 100; i++)
-    {
-        strcpy(instructionPointer[i], "");
-    }
 
     for(int i = 0; i < 100; i++)
     {
-        strcpy(instructionPointer[i], "");
+        strcpy(instructionPointer[i], "\0");
         fgets(instructionPointer[i], 50, fp);
     }
     fclose(fp);
-    int instructLinePtr = 0;
 
+    int instructLinePtr = 0;
     while(instructLinePtr!=100)
     {
-
-        char currLine[50]; 
-        char currCommand[10]; 
+        char currLine[50] = "\0"; 
+        char currCommand[10] = "\0"; 
         if(instructLinePtr>=100)
         {
             break;
@@ -257,7 +238,6 @@ int main(int argc, char* argv[])
         
         strcpy(currLine ,instructionPointer[instructLinePtr]);
         parseCommand(currLine, currCommand);
-        
         
         if(strcmp("read", currCommand)==0 || strcmp("print", currCommand)==0)
         {
@@ -288,16 +268,7 @@ int main(int argc, char* argv[])
                 continue;
             }
         }
-        else if(strlen(currLine)==0)
-        {
-            printf("Line %d\n", instructLinePtr);
-            instructLinePtr++;
-            continue;
-        }
-        
         instructLinePtr++;
-
     }
     printf("\n");
-    
 }
