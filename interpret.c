@@ -24,7 +24,6 @@ int jumpAt(char* currLine)
 }
 
 //find command read register 
-//may not work with negative numbers
 int isNumber(char* stringReg)
 {
     int condition = 1;
@@ -130,7 +129,6 @@ int jumpCondition(char* currLine, int* registers, int currentLineInstruction, in
     
     return currentLineInstruction;    
 }
-
 //FILE IO
 void ioInstructions(char* currLine, int* registers)
 {
@@ -156,10 +154,9 @@ void ioInstructions(char* currLine, int* registers)
         
     }
 }
-//arithmetic only supports multiply
+//arithmetic commands and mov
 void arithmeticInstructions(char* currLine, int* registers)
 {
-    //arithmetic only supports multiply
     char tempCommand[10]; 
     char readFirst[10]; 
     char readSec[10];
@@ -204,8 +201,6 @@ void arithmeticInstructions(char* currLine, int* registers)
 
     //copy and paste this into if statements above instead
     registers[registerIndex(readSec)] = y;
-   // CHECK DIVIDE ALGO
-
 }
 int main(int argc, char* argv[])
 {
@@ -258,7 +253,6 @@ int main(int argc, char* argv[])
         }
         else if(strcmp("je", currCommand)==0 || strcmp("jne", currCommand)==0 || strcmp("jg", currCommand)==0 || strcmp("jge", currCommand)==0 || strcmp("jl", currCommand)==0 || strcmp("jle", currCommand)==0)
         {
-            //int temp = instructLinePtr;
             int isSuccess = 0;
             instructLinePtr = jumpCondition(currLine, registers, instructLinePtr, &isSuccess);
 
