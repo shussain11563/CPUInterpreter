@@ -154,7 +154,7 @@ void ioInstructions(char* currLine, int* registers)
         
     }
 }
-//arithmetic commands and mov
+//arithmetic commands and mov command
 void arithmeticInstructions(char* currLine, int* registers)
 {
     char tempCommand[10]; 
