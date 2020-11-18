@@ -67,7 +67,7 @@ int jumpCondition(char* currLine, int* registers, int currentLineInstruction, in
         int index = registerIndex(readFirst);
         x = registers[index];
     }
-
+    
     //grab second register
     if(isNumber(readSec)==1)
     {
